@@ -1,0 +1,51 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8      
+    - name: Build with Gradle
+      run: chmod a=rwx ./gradlew
+    - name: Build with Gradle
+      run: ./gradlew build :app:build
+    - name: check
+      run: ls /home/runner/work/hubble_gallery/hubble_gallery/app/build/reports/
+    - name: check2
+      run: ls /home/runner/work/hubble_gallery/hubble_gallery/app/build/
+    - name: check3
+      run: ls /home/runner/work/hubble_gallery/
+    - name: check4
+      run: cat /home/runner/work/hubble_gallery/hubble_gallery/app/build/reports/lint-results.html
+    - name: navigating
+      run: cd /home/runner/work/hubble_gallery/hubble_gallery
+    - name: ls
+      run: ls
+    - name: ls app
+      run: ls app
+    - name: Git init
+      run: git init
+    - name: .appbuild
+      run: git add -f app/build
+    - name: Git create
+      run: git config --global user.email "user@xaker.tk"
+    - name: Github Identify
+      run: git config --global user.name "USER"
+    - name: Gen random string
+      run: echo 'No random availible'
+    - name: Git commit
+      run: git commit -m 'resources compiled'
+    - name: Git Push
+      run: git push -u origin master
